@@ -10,20 +10,26 @@ def day1(part, debug=False):
     global deb
     if debug:
         deb = True
+    # used to indicate position on the grid 
     horizontal = 0
     vertical = 0
     face = "north"
+    # d will keep track of points traveled to so far 
     d = {(0,0)}
     directions = inp.split(", ")
     for step in directions:
         debug_print("Step is " + step)
         turn = step[0]
         dist = int(step[1:])
+        # face indicates which way you're facing 
         face = move_result_calculator(turn, face)
         if face is "north":
+            # the outer if works for the simple case of part 1
             if part is "part2":
+                # the for loop is used to actually mark all points between start and stop points as visited to check which is the first point where there is an overlap 
                 for i in range(vertical+1, vertical+dist+1): # starting from +1 to avoid checking the same spot as the one last standing on
                     debug_print("[North] Going to " + str(horizontal) + "," + str(i))
+                    # at every point check whether it has been visited already 
                     if (horizontal, i) in d:
                         return (horizontal, i)
                     else:
@@ -63,6 +69,7 @@ def day1(part, debug=False):
         return horizontal+vertical # for part 1
 
 def move_result_calculator(turn, face):
+    # calculates which way you are facing given current orientation and turn value 
     res = ""
     if turn is "L":
         if face is "north":
