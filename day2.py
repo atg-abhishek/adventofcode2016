@@ -12,9 +12,11 @@ def day2(part, debug=False):
         deb = True
     instructions = inp.split("\n")
     keypad_part1 = [[1,2,3],[4,5,6],[7,8,9]]
+    # for the second layout of the keypad adding zeroes to make a uniform grid 
     keypad_part2 = [[0,0,1,0,0],[0,2,3,4,0],[5,6,7,8,9],[0,10,11,12,0],[0,0,13,0,0]]
     first = 0
     second = 0
+    # upper bound defines the edge of the grid 
     upper_bound = 2 # for part 1
     if part is "part1":
         keypad = keypad_part1
@@ -22,6 +24,7 @@ def day2(part, debug=False):
         second = 1
     else:
         keypad = keypad_part2
+        # starting position of the 5 in the grid 
         first = 2
         second = 0
         upper_bound = 4
@@ -30,6 +33,9 @@ def day2(part, debug=False):
         li = list(ins)
         for l in li:
             debug_print("Currently at " + str(keypad[first][second]) + " Step is " + l)
+            # processing steps based on where to go 
+            # the internal if statements are to prevent going out of bounds 
+            # the checking for zero is used to prevent going out of bounds in the second keypad 
             if l is "L":
                 if (second-1)>=0 and keypad[first][second-1] is not 0:
                     second -= 1
