@@ -47,12 +47,12 @@ def day7_part2():
         # following finds all the places that meet the aba condition and places in them in a set so later we can check to find the corresponding bab sequence 
         for r in remaining:
             check_aba(r,d)
-        # pprint(d)
+        
         found_in_hypernet = False
         for seq in d:
             for h in hypernets:
                 if seq in h:
-                    # pprint(l)
+                    
                     found_in_hypernet = True
                     count += 1
                     break
