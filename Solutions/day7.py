@@ -13,12 +13,16 @@ def day7_part1():
     global lst
     count = 0
     for l in lst:
-        # pprint(l)
+        # the following flag is used to break out of the main for loop on detecting all conditions met
         hypernet_fail = False
+        # following isolates the sequences between [ and ]
         hypernets = re.findall(r"\[[a-z]*\]", l)
+        # now want to eliminate those sequences from the string 
         remaining = re.sub(r"\[[a-z]*\]", "-",l)
+        # bringing all the other parts into a single string 
         remaining = remaining.split("-")
         for h in hypernets:
+            # remove the opening and closing square brackets
             if check_abba(h[1:-1]):
                 hypernet_fail = True
                 break
@@ -40,6 +44,7 @@ def day7_part2():
         remaining = re.sub(r"\[[a-z]*\]", "-",l)
         remaining = remaining.split("-")
         d = set()
+        # following finds all the places that meet the aba condition and places in them in a set so later we can check to find the corresponding bab sequence 
         for r in remaining:
             check_aba(r,d)
         # pprint(d)
@@ -59,6 +64,7 @@ def day7_part2():
 
 def check_abba(s):
     for i in range(0,len(s)-3):
+        # following if block to remove the cases with same consecutive letters 
         if s[i] == s[i+1]:
             continue
         if s[i]+s[i+1] == s[i+3]+s[i+2]:
@@ -70,6 +76,7 @@ def check_aba(s,d):
         if s[i]==s[i+1]:
             continue
         if s[i] == s[i+2]:
+            # adding directly into d the sequence needed to check for presence in the supernetsadd
             d.add(s[i+1]+s[i]+s[i+1])
 
         
