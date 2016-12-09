@@ -13,7 +13,7 @@ width = 50
 for i in range(0,height):
     temp = []
     for j in range(0,width):
-        temp.append(False)
+        temp.append(" ")
     grid.append(temp)
 
 def day8():
@@ -34,8 +34,11 @@ def day8():
     
     for i in range(0,height):
         for j in range(0,width):
-            if grid[i][j]:
+            if grid[i][j] == "*":
                 count += 1
+    for i in range(0,height):
+        row = grid[i]
+        pprint("".join(row))
     return count   
 
 def rotate_row(row_num, amount):
@@ -43,7 +46,7 @@ def rotate_row(row_num, amount):
     amount = int(amount)
     global grid
     row = grid[row_num]
-    res = [False for i in range(0, len(row))]
+    res = [" " for i in range(0, len(row))]
     for i in range(0,len(row)):
         res[(i+amount)%len(row)] = row[i]
     grid[row_num] = res
@@ -52,10 +55,10 @@ def rotate_col(col_num, amount):
     col_num = int(col_num)
     amount = int(amount)
     global grid, height, width
-    temp = [False for i in range(0,height)]
+    temp = [" " for i in range(0,height)]
     for i in range(0,height):
         temp[i] = grid[i][col_num]
-    res = [False for i in range(0,height)]
+    res = [" " for i in range(0,height)]
     for i in range(0,height):
         res[(i+amount)%height] = temp[i]
     for i in range(0,height):
@@ -67,6 +70,6 @@ def rect(a,b):
     b = int(b)
     for row in range(0, a):
         for col in range(0, b):
-            grid[row][col] = True
+            grid[row][col] = "*"
 
 pprint(day8())
