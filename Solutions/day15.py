@@ -8,13 +8,15 @@ with open("../Data/day15.txt") as infile:
 
 # lst = ["Disc #1 has 5 positions; at time=0, it is at position 4.", "Disc #2 has 2 positions; at time=0, it is at position 1."] #test input 
 
-def day15():
+def day15(part):
     global lst
     disks = []
     for l in lst:
         temp = l.split(" ")
         # disk number, initial position, total number of positions
         disks.append((int(temp[1][1]), int(temp[-1][0]), int(temp[3]) ))
+    if part == 'part2':
+        disks.append((7,0,11))
     time = 0
     success = False
     while (not success):
@@ -44,4 +46,4 @@ def determine_positions(time, disks):
         time = time + 1
     return res
 
-pprint(day15())
+pprint(day15("part2"))
